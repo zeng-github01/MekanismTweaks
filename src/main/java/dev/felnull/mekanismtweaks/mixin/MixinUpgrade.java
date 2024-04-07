@@ -21,6 +21,9 @@ public abstract class MixinUpgrade {
     @Shadow
     private int maxStack;
 
+    @Shadow
+    private int maxItemStack;
+
     /**
      * @author nin8995
      * @reason wrap max stack size
@@ -30,6 +33,19 @@ public abstract class MixinUpgrade {
         Upgrade upgrade = (Upgrade) (Object) this;
         return upgrade == Upgrade.SPEED || upgrade == Upgrade.ENERGY ? 64 : maxStack;
     }
+
+    /**
+     *
+     * @return warp max item stack size
+     */
+
+    @Overwrite
+    public int getItemMax() {
+        Upgrade upgrade = (Upgrade) (Object) this;
+        return upgrade == Upgrade.SPEED || upgrade == Upgrade.ENERGY ? 64 : maxItemStack;
+    }
+
+
 
     /**
      * @author ni8995

@@ -2,7 +2,7 @@ buildscript {
     repositories {
         mavenCentral()
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = "https://files.minecraftforge.net/maven" }
         maven { url = "https://repo.spongepowered.org/maven" }
     }
     dependencies {
@@ -61,7 +61,7 @@ dependencies {
         exclude module: 'gson'
     }
 
-    compile 'curse.maven:Mekanism-268560:2835175'
+    compile 'curse.maven:mekanism-ce-unofficial-840735:5130458'
     runtime 'mezz.jei:jei_1.12.2:4.16.1.302'
 }
 
