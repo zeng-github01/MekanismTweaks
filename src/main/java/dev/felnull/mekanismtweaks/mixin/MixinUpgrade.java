@@ -31,20 +31,18 @@ public abstract class MixinUpgrade {
     @Overwrite
     public int getMax() {
         Upgrade upgrade = (Upgrade) (Object) this;
-        return upgrade == Upgrade.SPEED || upgrade == Upgrade.ENERGY ? 64 : maxStack;
+        return upgrade == Upgrade.SPEED || upgrade == Upgrade.ENERGY || upgrade == Upgrade.GAS ? 64 : maxStack;
     }
 
     /**
-     *
      * @return warp max item stack size
      */
 
     @Overwrite
     public int getItemMax() {
         Upgrade upgrade = (Upgrade) (Object) this;
-        return upgrade == Upgrade.SPEED || upgrade == Upgrade.ENERGY ? 64 : maxItemStack;
+        return upgrade == Upgrade.SPEED || upgrade == Upgrade.ENERGY || upgrade == Upgrade.GAS ? 64 : maxItemStack;
     }
-
 
 
     /**
@@ -72,10 +70,12 @@ public abstract class MixinUpgrade {
         if (this.canMultiply()) {
             double effect =
                     upgrade == Upgrade.ENERGY
-                    ? Utils.capacity(tile)
-                    : upgrade == Upgrade.SPEED
-                      ? Utils.time(tile)
-                      : Math.pow(MekanismConfig.current().general.maxUpgradeMultiplier.val(), (float) tile.getComponent().getUpgrades(upgrade) / (float) getMax());
+                            ? Utils.capacity(tile)
+                            : upgrade == Upgrade.SPEED
+                            ? Utils.time(tile)
+                            : upgrade == Upgrade.GAS
+                            ? Utils.efficiency(tile)
+                            : Math.pow(MekanismConfig.current().general.maxUpgradeMultiplier.val(), (float) tile.getComponent().getUpgrades(upgrade) / (float) getMax());
             ret.add(LangUtils.localize("gui.upgrades.effect") + ": " + Utils.exponential(effect) + "x");
         }
 

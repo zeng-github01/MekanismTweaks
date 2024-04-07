@@ -20,6 +20,10 @@ public class Utils {
         return Math.pow(MekanismConfig.current().general.maxUpgradeMultiplier.val(), tile.getComponent().getUpgrades(Upgrade.ENERGY) / 8D);
     }
 
+    public static double efficiency(IUpgradeTile tile) {
+        return Math.pow(MekanismConfig.current().general.maxUpgradeMultiplier.val(),tile.getComponent().getUpgrades(Upgrade.GAS) / 8D);
+    }
+
     public static String exponential(double d) {
         int significant = 4;
         int exp = (int) Math.floor(Math.log10(d));
